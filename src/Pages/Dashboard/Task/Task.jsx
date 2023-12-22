@@ -39,6 +39,7 @@ const Task = () => {
 	//   };
 
 	const handleFormSubmit = async (data) => {
+		setModalOpen(true);
 		console.log("submitted");
 		const task = {
 			email: user.email,
@@ -75,8 +76,8 @@ const Task = () => {
 				<button
 					className="btn bg-cyan-500 hover:bg-cyan-700 text-white"
 					onClick={() =>
-						document.getElementById("my_modal_1").showModal() && setModalOpen(true)
-					}>
+						document.getElementById("my_modal_1").showModal() 
+					} >
 					Add Task
 				</button>
 				{/* {
@@ -147,7 +148,7 @@ const Task = () => {
 										Submit
 									</button>
 									<button
-									    onClick={()=>closeModal(isModalOpen)}
+									     onClick={() => document.getElementById("my_modal_1").close()}
 										className="btn bg-slate-500 text-white hover:bg-slate-700">
 										Close
 									</button>
