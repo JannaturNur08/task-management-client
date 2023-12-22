@@ -8,7 +8,7 @@ import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import useTask from "../../../hooks/useTask";
 
 const DraggableTask = ({ task }) => {
-	const [myTasks, refetch] = useTask();
+	const [, refetch] = useTask();
 	const axiosPublic = useAxiosPublic();
 	const [{ isDragging }, drag] = useDrag(() => ({
 		type: "task",
