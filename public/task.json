@@ -1,33 +1,33 @@
 [
-    {
+    {   "email" : "jannaturnur08@gmail.com",
         "task_title": "Complete Project Proposal",
         "description": "Write and finalize the project proposal document for client review.",
         "deadline": "2023-02-15",
         "priority": "High",
         "status": "Todo"
       },
-      {
+      { "email" : "sondha2646@gmail.com",
         "task_title": "Code Refactoring",
         "description": "Review and refactor the codebase to improve efficiency and maintainability.",
         "deadline": "2023-03-05",
         "priority": "Moderate",
-        "status": "In-progress"
+        "status": "Todo"
       },
-      {
+      { "email" : "jannaturnur08@gmail.com",
         "task_title": "Client Meeting",
         "description": "Schedule and prepare for a meeting with the client to discuss project updates.",
         "deadline": "2023-01-28",
         "priority": "Low",
-        "status": "Done"
+        "status": "Todo"
       },
-      {
+      { "email" : "jannaturnur08@gmail.com",
         "task_title": "Testing Phase",
         "description": "Conduct thorough testing of the application to identify and fix any bugs or issues.",
         "deadline": "2023-02-10",
         "priority": "Moderate",
-        "status": "In-progress"
+        "status": "Todo"
       },
-      {
+      { "email" : "sondha2646@gmail.com",
         "task_title": "Documentation Update",
         "description": "Update project documentation with the latest features and changes.",
         "deadline": "2023-03-20",
