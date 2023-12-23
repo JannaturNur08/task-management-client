@@ -21,7 +21,7 @@ const DraggableTask = ({ task }) => {
 	console.log(isDragging);
 
 	
-	//delete coupon
+	//delete task
 	const handleDelete = (id) => {
 		Swal.fire({
 			title: "Are you sure?",
