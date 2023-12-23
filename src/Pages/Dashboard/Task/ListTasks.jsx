@@ -4,7 +4,7 @@ import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 
 const ListTasks = () => {
-	const [myTasks, refetch] = useTask();
+	const [myTasks, setMyTasks] = useTask();
 	const [draggedTaskId, setDraggedTaskId] = useState([]);
 	const axiosPublic = useAxiosPublic();
 
@@ -48,16 +48,25 @@ const ListTasks = () => {
 
 				if (response.data.success) {
 					// Update the state after a successful database update
-					const updatedState = myTasks.map((task) => {
-						if (task._id === taskId) {
+					// const updatedState = myTasks.map((task) => {
+					// 	if (task._id === taskId) {
+					// 		task.status = column;
+					// 	}
+					// 	return task;
+					// });
+					setMyTasks((prevTasks) => {
+						return prevTasks.map((task) => {
+						  if (task._id === taskId) {
 							task.status = column;
-						}
-						return task;
-					});
+						  }
+						  return task;
+						});
+					  });
 
-					refetch(updatedState);
-					location.reload();
+					//refetch(updatedState);
+					//location.reload();
 					//refetch();
+					setDraggedTaskId(null);
 					Swal.fire({
 						position: "top-end",
 						icon: "success",
@@ -65,7 +74,7 @@ const ListTasks = () => {
 						showConfirmButton: false,
 						timer: 1500,
 					});
-					refetch();
+					//refetch();
 				} else {
 					console.error(
 						"Failed to update task status in the database"
@@ -80,7 +89,7 @@ const ListTasks = () => {
 	};
 	const allowDrop = (event) => {
 		event.preventDefault();
-		refetch();
+		//refetch();
 	};
 
 	return (

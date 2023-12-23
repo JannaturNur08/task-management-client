@@ -11,6 +11,7 @@ import Task from "../Pages/Dashboard/Task/Task";
 import DragDrop from "../Pages/Dashboard/Drag&Drop Test/DragNDrop";
 import DragNDrop from "../Pages/Dashboard/Drag&Drop Test/DragNDrop";
 import ListTasks from "../Pages/Dashboard/Task/ListTasks";
+import BeautifulDragNDrop from "../Pages/Dashboard/Drag&Drop Test/BeautifulDragNDrop";
 
 export const router = createBrowserRouter([
     {
