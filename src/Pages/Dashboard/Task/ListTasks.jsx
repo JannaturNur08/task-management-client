@@ -19,16 +19,16 @@ const ListTasks = () => {
 		// event.dataTransfer.setData("text/plain", taskId.toString());
 		event.dataTransfer.setData("text/plain", taskId);
 
-		console.log(taskId);
+		//console.log(taskId);
 		setDraggedTaskId(taskId);
-		console.log(draggedTaskId);
+		//console.log(draggedTaskId);
 	};
 	console.log(myTasks);
 
 	const drop = async (event, column) => {
 		const taskId = event.dataTransfer.getData("text/plain");
 		//  console.log(taskId);
-		console.log(event);
+		//console.log(event);
 		event.currentTarget.classList.remove("drop");
 		//event.preventDefault();
 
