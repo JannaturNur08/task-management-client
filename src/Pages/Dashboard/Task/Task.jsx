@@ -7,10 +7,26 @@ import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import useAuth from "../../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import { useDrop } from "react-dnd";
+import ListTasks from "./ListTasks";
+
+
 
 const Task = () => {
 	const [myTasks, refetch] = useTask();
-	const [isModalOpen, setModalOpen] = useState(false);
+	
+	const [{ isOver }, drop] = useDrop(() => ({
+		accept : "task",
+		
+		drop:(item)=>addItemToSection(item.id),
+		collect: (monitor) => ({ isOver: !!monitor.isOver(), })
+	  }))
+    
+	 
+	  const addItemToSection = (id) => {
+		console.log("dropped",id);
+	}
+
 	const axiosPublic = useAxiosPublic();
 	const { user } = useAuth();
 	const {
@@ -22,24 +38,8 @@ const Task = () => {
 
 	console.log(myTasks);
 
-	// const openModal = () => {
-	// 	console.log("Opening modal");
-	// 	setModalOpen(true);
-	// 	console.log("isModalOpen:", isModalOpen);
-	// };
-
-	const closeModal = () => {
-		setModalOpen(false);
-	};
-
-	//   const handleTaskSubmit = (data) => {
-	// 	// Logic to add task using Tanstack Query
-	// 	// Call your Tanstack Query mutation function here
-	// 	console.log('Task submitted:', data);
-	//   };
 
 	const handleFormSubmit = async (data) => {
-		setModalOpen(true);
 		console.log("submitted");
 		const task = {
 			email: user.email,
@@ -58,7 +58,7 @@ const Task = () => {
 			if (resetForm) {
 				reset();
 			}
-
+             
 			refetch();
 			Swal.fire({
 				position: "top-end",
@@ -76,8 +76,8 @@ const Task = () => {
 				<button
 					className="btn bg-cyan-500 hover:bg-cyan-700 text-white"
 					onClick={() =>
-						document.getElementById("my_modal_1").showModal() 
-					} >
+						document.getElementById("my_modal_1").showModal()
+					}>
 					Add Task
 				</button>
 				{/* {
@@ -96,7 +96,8 @@ const Task = () => {
 									<label className="font-bold">
 										Task Title:
 									</label>
-									<input className="input-bordered  input"
+									<input
+										className="input-bordered  input"
 										{...register("task_title", {
 											required: true,
 										})}
@@ -107,18 +108,19 @@ const Task = () => {
 									<label className="font-bold">
 										Description:
 									</label>
-									<textarea className="input-bordered  input"
+									<textarea
+										className="input-bordered  input"
 										{...register("description", {
 											required: true,
 										})}
 									/>
 								</div>
 								<div className="flex items-center gap-2">
-								<label className="font-bold">
-									Deadline:
-									
-								</label>
-								<input className="input-bordered  input"
+									<label className="font-bold">
+										Deadline:
+									</label>
+									<input
+										className="input-bordered  input"
 										type="date"
 										{...register("deadline", {
 											required: true,
@@ -126,12 +128,11 @@ const Task = () => {
 									/>
 								</div>
 								{/* priority */}
-							<div className="flex items-center gap-2">
-							<label className="font-bold">
-									Priority:
-									
-								</label>
-								<select 
+								<div className="flex items-center gap-2">
+									<label className="font-bold">
+										Priority:
+									</label>
+									<select
 										{...register("priority", {
 											required: true,
 										})}>
@@ -139,7 +140,7 @@ const Task = () => {
 										<option value="medium">Medium</option>
 										<option value="low">Low</option>
 									</select>
-							</div>
+								</div>
 
 								<div className="flex gap-3 justify-end">
 									<button
@@ -148,7 +149,11 @@ const Task = () => {
 										Submit
 									</button>
 									<button
-									     onClick={() => document.getElementById("my_modal_1").close()}
+										onClick={() =>
+											document
+												.getElementById("my_modal_1")
+												.close()
+										}
 										className="btn bg-slate-500 text-white hover:bg-slate-700">
 										Close
 									</button>
@@ -176,26 +181,42 @@ const Task = () => {
 					</div>
 				</div>
 				{/* In progress */}
-				<div className="max-w-96">
+				<div className="max-w-96" ref={drop} >
 					<div className="flex gap-2 items-center bg-blue-400 p-3 rounded-lg mb-4 ">
 						<div className="h-4 aspect-square  bg-blue-300 rounded-full"></div>
-						<h3 className="font-bold text-white">Doing (3)</h3>
+						<h3 className="font-bold text-white">In-Progress (3)</h3>
 					</div>
 					<div className="w-96 h-56 border shadow-inner rounded-lg border-dashed flex items-center justify-center">
 						<p className="">Drag Items Here</p>
+						{myTasks.filter(task=> task.status === "In-Progress").map((task) => (
+							<ListTasks
+								key={task._id}
+								task={task}
+								refetch={refetch}
+							/>
+						))}
 					</div>
 				</div>
 				{/* Done */}
-				<div className="max-w-96">
+				<div className="max-w-96" ref={drop}>
 					<div className="flex gap-2 items-center bg-green-400 p-3 rounded-lg mb-4 ">
 						<div className="h-4 aspect-square  bg-green-300 rounded-full"></div>
 						<h3 className="font-bold text-white">Done (3)</h3>
 					</div>
 					<div className="w-96 h-56 border shadow-inner rounded-lg border-dashed flex items-center justify-center">
-						<p className="">Drag Items Here</p>
+						
+						{myTasks.filter(task=> task.status === "Done").map((task) => (
+							<ListTasks
+								key={task._id}
+								task={task}
+								refetch={refetch}
+							/>
+						))}
 					</div>
 				</div>
+				
 			</div>
+			
 		</div>
 	);
 };

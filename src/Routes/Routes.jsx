@@ -8,6 +8,9 @@ import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
 import Dashboard from "../layout/Dashboard";
 import Task from "../Pages/Dashboard/Task/Task";
+import DragDrop from "../Pages/Dashboard/Drag&Drop Test/DragNDrop";
+import DragNDrop from "../Pages/Dashboard/Drag&Drop Test/DragNDrop";
+import ListTasks from "../Pages/Dashboard/Task/ListTasks";
 
 export const router = createBrowserRouter([
     {
@@ -32,7 +35,7 @@ export const router = createBrowserRouter([
         children:[
             {
                 path: 'taskManagement',
-                element: <Task></Task>
+                element: <ListTasks></ListTasks>
             },
         ]
 

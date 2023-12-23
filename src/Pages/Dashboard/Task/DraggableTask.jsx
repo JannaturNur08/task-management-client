@@ -1,4 +1,4 @@
-import { useDrag } from "react-dnd";
+import { useDrag, useDrop } from "react-dnd";
 
 import { IconContext } from "react-icons";
 import { MdDateRange, MdDeleteForever } from "react-icons/md";
@@ -18,9 +18,9 @@ const DraggableTask = ({ task }) => {
 		}),
 	}));
 
-
 	console.log(isDragging);
 
+	
 	//delete coupon
 	const handleDelete = (id) => {
 		Swal.fire({
@@ -50,6 +50,7 @@ const DraggableTask = ({ task }) => {
 	return (
 		<div
 			ref={drag}
+			style={{ cursor: "move" }}
 			className={`shadow-md hover:shadow-lg border border-white rounded-lg p-6 ${
 				isDragging ? "opacity-50" : ""
 			}`}>
@@ -74,7 +75,7 @@ const DraggableTask = ({ task }) => {
 			</div>
 
 			{/* Task Deadline */}
-		<div className="flex justify-between items-center">
+			<div className="flex justify-between items-center">
 				<div className="flex items-center  gap-1 w-max my-3">
 					<IconContext.Provider
 						value={{
@@ -85,19 +86,20 @@ const DraggableTask = ({ task }) => {
 					<p className="text-white text-xs bg-slate-500 p-1 px-2 rounded-full">
 						{task.deadline}
 					</p>
-					
 				</div>
 				<div>
-						<button className="btn bg-gray-400 hover:bg-red-500 text-white p-0 min-h-0 h-9 aspect-square" onClick={()=>handleDelete(task._id)}>
-							<IconContext.Provider
-								value={{
-									size: 20,
-								}}>
-								<MdDeleteForever />
-							</IconContext.Provider>
-						</button>
-					</div>
-		</div>
+					<button
+						className="btn bg-gray-400 hover:bg-red-500 text-white p-0 min-h-0 h-9 aspect-square"
+						onClick={() => handleDelete(task._id)}>
+						<IconContext.Provider
+							value={{
+								size: 20,
+							}}>
+							<MdDeleteForever />
+						</IconContext.Provider>
+					</button>
+				</div>
+			</div>
 		</div>
 	);
 };
