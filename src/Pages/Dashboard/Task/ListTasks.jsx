@@ -264,75 +264,84 @@ const ListTasks = () => {
 			<div className="flex gap-5 p-12">
 				{/* todo */}
 				<div
-					className="column column-todo bg-gray-300 w-72 "
-					data-column="todo"
+					className="column column-Todo w-72"
+					data-column="Todo"
 					onDragEnter={dragEnter}
 					onDragLeave={dragLeave}
 					onDragOver={allowDrop}
 					onDrop={(event) => drop(event, "todo")}>
-					<h2>Todo</h2>
-					{myTasks
-						.filter((card) => card.status === "todo")
-						.map((task) => (
-							<div
-								key={task._id}
-								draggable="true"
-								onDragStart={(event) => drag(event, task._id)}
-								data-id={task._id}
-								style={{ cursor: "move" }}
-								className="shadow-md hover:shadow-lg border border-white rounded-lg p-6">
-								<p className="text-white w-max text-xs bg-blue-700 p-1 px-2 rounded-full mb-1">
-									{task.priority}
-								</p>
-
-								{/* Task Title */}
-								<h4 className="font-bold">{task.task_title}</h4>
-
-								{/* Task Description */}
-								<div className="flex gap-1 my-3">
-									<div>
-										<IconContext.Provider
-											value={{
-												size: 20,
-											}}>
-											<MdOutlineDescription />
-										</IconContext.Provider>
-									</div>
-									<p className="text-sm">
-										{task.description}
+					<div className="flex gap-2 items-center bg-gray-400 p-3 rounded-lg mb-4 ">
+						<div className="h-4 aspect-square  bg-gray-300 rounded-full"></div>
+						<h3 className="font-bold text-white">To-Do</h3>
+					</div>
+					<div className="flex flex-col gap-4">
+						{myTasks
+							.filter((card) => card.status === "Todo")
+							.map((task) => (
+								<div
+									key={task._id}
+									draggable="true"
+									onDragStart={(event) =>
+										drag(event, task._id)
+									}
+									data-id={task._id}
+									style={{ cursor: "move" }}
+									className="shadow-md hover:shadow-lg border border-white rounded-lg p-6">
+									<p className="text-white w-max text-xs bg-blue-700 p-1 px-2 rounded-full mb-1">
+										{task.priority}
 									</p>
-								</div>
 
-								{/* Task Deadline */}
-								<div className="flex justify-between items-center">
-									<div className="flex items-center  gap-1 w-max my-3">
-										<IconContext.Provider
-											value={{
-												size: 20,
-											}}>
-											<MdDateRange />
-										</IconContext.Provider>
-										<p className="text-white text-xs bg-slate-500 p-1 px-2 rounded-full">
-											{task.deadline}
-										</p>
-									</div>
-									<div>
-										<button
-											className="btn bg-gray-400 hover:bg-red-500 text-white p-0 min-h-0 h-9 aspect-square"
-											onClick={() =>
-												handleDelete(task._id)
-											}>
+									{/* Task Title */}
+									<h4 className="font-bold">
+										{task.task_title}
+									</h4>
+
+									{/* Task Description */}
+									<div className="flex gap-1 my-3">
+										<div>
 											<IconContext.Provider
 												value={{
 													size: 20,
 												}}>
-												<MdDeleteForever />
+												<MdOutlineDescription />
 											</IconContext.Provider>
-										</button>
+										</div>
+										<p className="text-sm">
+											{task.description}
+										</p>
+									</div>
+
+									{/* Task Deadline */}
+									<div className="flex justify-between items-center">
+										<div className="flex items-center  gap-1 w-max my-3">
+											<IconContext.Provider
+												value={{
+													size: 20,
+												}}>
+												<MdDateRange />
+											</IconContext.Provider>
+											<p className="text-white text-xs bg-slate-500 p-1 px-2 rounded-full">
+												{task.deadline}
+											</p>
+										</div>
+										<div>
+											<button
+												className="btn bg-gray-400 hover:bg-red-500 text-white p-0 min-h-0 h-9 aspect-square"
+												onClick={() =>
+													handleDelete(task._id)
+												}>
+												<IconContext.Provider
+													value={{
+														size: 20,
+													}}>
+													<MdDeleteForever />
+												</IconContext.Provider>
+											</button>
+										</div>
 									</div>
 								</div>
-							</div>
-						))}
+							))}
+					</div>
 				</div>
 
 				{/* in progress */}
@@ -343,77 +352,78 @@ const ListTasks = () => {
 					onDragLeave={dragLeave}
 					onDragOver={allowDrop}
 					onDrop={(event) => drop(event, "In-Progress")}>
-					<h2>In-Progress</h2>
-					{myTasks
-						.filter((card) => card.status === "In-Progress")
-						.map((task) => (
-							// <article
-							// 	key={todo._id}
-							// 	className="card bg-orange-500 h-14 cursor-grab"
-							// 	draggable="true"
-							// 	onDragStart={(event) => drag(event, todo._id)}
-							// 	data-id={todo._id}>
-							// 	<h3>{todo.task_title}</h3>
-							// </article>
-							<div
-								key={task._id}
-								draggable="true"
-								onDragStart={(event) => drag(event, task._id)}
-								data-id={task._id}
-								style={{ cursor: "move" }}
-								className="shadow-md hover:shadow-lg border border-white rounded-lg p-6">
-								<p className="text-white w-max text-xs bg-blue-700 p-1 px-2 rounded-full mb-1">
-									{task.priority}
-								</p>
-
-								{/* Task Title */}
-								<h4 className="font-bold">{task.task_title}</h4>
-
-								{/* Task Description */}
-								<div className="flex gap-1 my-3">
-									<div>
-										<IconContext.Provider
-											value={{
-												size: 20,
-											}}>
-											<MdOutlineDescription />
-										</IconContext.Provider>
-									</div>
-									<p className="text-sm">
-										{task.description}
+					<div className="flex gap-2 items-center bg-blue-400 p-3 rounded-lg mb-4 ">
+						<div className="h-4 aspect-square  bg-blue-300 rounded-full"></div>
+						<h3 className="font-bold text-white">In-Progress</h3>
+					</div>
+					<div className="flex flex-col gap-4">
+						{myTasks
+							.filter((card) => card.status === "In-Progress")
+							.map((task) => (
+								<div
+									key={task._id}
+									draggable="true"
+									onDragStart={(event) =>
+										drag(event, task._id)
+									}
+									data-id={task._id}
+									style={{ cursor: "move" }}
+									className="shadow-md hover:shadow-lg border border-white rounded-lg p-6">
+									<p className="text-white w-max text-xs bg-blue-700 p-1 px-2 rounded-full mb-1">
+										{task.priority}
 									</p>
-								</div>
 
-								{/* Task Deadline */}
-								<div className="flex justify-between items-center">
-									<div className="flex items-center  gap-1 w-max my-3">
-										<IconContext.Provider
-											value={{
-												size: 20,
-											}}>
-											<MdDateRange />
-										</IconContext.Provider>
-										<p className="text-white text-xs bg-slate-500 p-1 px-2 rounded-full">
-											{task.deadline}
-										</p>
-									</div>
-									<div>
-										<button
-											className="btn bg-gray-400 hover:bg-red-500 text-white p-0 min-h-0 h-9 aspect-square"
-											onClick={() =>
-												handleDelete(task._id)
-											}>
+									{/* Task Title */}
+									<h4 className="font-bold">
+										{task.task_title}
+									</h4>
+
+									{/* Task Description */}
+									<div className="flex gap-1 my-3">
+										<div>
 											<IconContext.Provider
 												value={{
 													size: 20,
 												}}>
-												<MdDeleteForever />
+												<MdOutlineDescription />
 											</IconContext.Provider>
-										</button>
+										</div>
+										<p className="text-sm">
+											{task.description}
+										</p>
+									</div>
+
+									{/* Task Deadline */}
+									<div className="flex justify-between items-center">
+										<div className="flex items-center  gap-1 w-max my-3">
+											<IconContext.Provider
+												value={{
+													size: 20,
+												}}>
+												<MdDateRange />
+											</IconContext.Provider>
+											<p className="text-white text-xs bg-slate-500 p-1 px-2 rounded-full">
+												{task.deadline}
+											</p>
+										</div>
+										<div>
+											<button
+												className="btn bg-gray-400 hover:bg-red-500 text-white p-0 min-h-0 h-9 aspect-square"
+												onClick={() =>
+													handleDelete(task._id)
+												}>
+												<IconContext.Provider
+													value={{
+														size: 20,
+													}}>
+													<MdDeleteForever />
+												</IconContext.Provider>
+											</button>
+										</div>
 									</div>
 								</div>
-							</div>
-						))}
+							))}
+					</div>
 				</div>
 				{/* done */}
 				<div
@@ -423,69 +433,78 @@ const ListTasks = () => {
 					onDragLeave={dragLeave}
 					onDragOver={allowDrop}
 					onDrop={(event) => drop(event, "Done")}>
-					<h2>Done</h2>
-					{myTasks
-						.filter((card) => card.status === "Done")
-						.map((task) => (
-							<div
-								key={task._id}
-								draggable="true"
-								onDragStart={(event) => drag(event, task._id)}
-								data-id={task._id}
-								style={{ cursor: "move" }}
-								className="shadow-md hover:shadow-lg border border-white rounded-lg p-6">
-								<p className="text-white w-max text-xs bg-blue-700 p-1 px-2 rounded-full mb-1">
-									{task.priority}
-								</p>
-
-								{/* Task Title */}
-								<h4 className="font-bold">{task.task_title}</h4>
-
-								{/* Task Description */}
-								<div className="flex gap-1 my-3">
-									<div>
-										<IconContext.Provider
-											value={{
-												size: 20,
-											}}>
-											<MdOutlineDescription />
-										</IconContext.Provider>
-									</div>
-									<p className="text-sm">
-										{task.description}
+					<div className="flex gap-2 items-center bg-green-400 p-3 rounded-lg mb-4 ">
+						<div className="h-4 aspect-square  bg-green-300 rounded-full"></div>
+						<h3 className="font-bold text-white">Done (3)</h3>
+					</div>
+					<div className="flex flex-col gap-4">
+						{myTasks
+							.filter((card) => card.status === "Done")
+							.map((task) => (
+								<div
+									key={task._id}
+									draggable="true"
+									onDragStart={(event) =>
+										drag(event, task._id)
+									}
+									data-id={task._id}
+									style={{ cursor: "move" }}
+									className="shadow-md hover:shadow-lg border border-white rounded-lg p-6">
+									<p className="text-white w-max text-xs bg-blue-700 p-1 px-2 rounded-full mb-1">
+										{task.priority}
 									</p>
-								</div>
 
-								{/* Task Deadline */}
-								<div className="flex justify-between items-center">
-									<div className="flex items-center  gap-1 w-max my-3">
-										<IconContext.Provider
-											value={{
-												size: 20,
-											}}>
-											<MdDateRange />
-										</IconContext.Provider>
-										<p className="text-white text-xs bg-slate-500 p-1 px-2 rounded-full">
-											{task.deadline}
-										</p>
-									</div>
-									<div>
-										<button
-											className="btn bg-gray-400 hover:bg-red-500 text-white p-0 min-h-0 h-9 aspect-square"
-											onClick={() =>
-												handleDelete(task._id)
-											}>
+									{/* Task Title */}
+									<h4 className="font-bold">
+										{task.task_title}
+									</h4>
+
+									{/* Task Description */}
+									<div className="flex gap-1 my-3">
+										<div>
 											<IconContext.Provider
 												value={{
 													size: 20,
 												}}>
-												<MdDeleteForever />
+												<MdOutlineDescription />
 											</IconContext.Provider>
-										</button>
+										</div>
+										<p className="text-sm">
+											{task.description}
+										</p>
+									</div>
+
+									{/* Task Deadline */}
+									<div className="flex justify-between items-center">
+										<div className="flex items-center  gap-1 w-max my-3">
+											<IconContext.Provider
+												value={{
+													size: 20,
+												}}>
+												<MdDateRange />
+											</IconContext.Provider>
+											<p className="text-white text-xs bg-slate-500 p-1 px-2 rounded-full">
+												{task.deadline}
+											</p>
+										</div>
+										<div>
+											<button
+												className="btn bg-gray-400 hover:bg-red-500 text-white p-0 min-h-0 h-9 aspect-square"
+												onClick={() =>
+													handleDelete(task._id)
+												}>
+												<IconContext.Provider
+													value={{
+														size: 20,
+													}}>
+													<MdDeleteForever />
+												</IconContext.Provider>
+											</button>
+										</div>
 									</div>
 								</div>
-							</div>
-						))}
+							))}
+					</div>
 				</div>
 			</div>
 		</main>
