@@ -15,6 +15,7 @@ const ListTasks = () => {
 	const [myTasks, setMyTasks] = useTask();
 	const { user } = useAuth();
 	const [, refetch] = useTask();
+	
 	const [draggedTaskId, setDraggedTaskId] = useState([]);
 	const axiosPublic = useAxiosPublic();
 
@@ -280,7 +281,7 @@ const ListTasks = () => {
 			<div className="flex gap-5 p-12">
 				{/* todo */}
 				<div
-					className="column column-Todo w-72"
+					className="column column-Todo w-72 min-h-screen border rounded-lg border-dashed"
 					data-column="ToDo"
 					onDragEnter={dragEnter}
 					onDragLeave={dragLeave}
@@ -362,7 +363,7 @@ const ListTasks = () => {
 
 				{/* in progress */}
 				<div
-					className="column column-ip  w-72"
+					className="column column-ip  w-72 min-h-screen border rounded-lg border-dashed"
 					data-column="In-Progress"
 					onDragEnter={dragEnter}
 					onDragLeave={dragLeave}
@@ -443,7 +444,7 @@ const ListTasks = () => {
 				</div>
 				{/* done */}
 				<div
-					className="column column-ip  w-72"
+					className="column column-ip  w-72 min-h-screen border rounded-lg border-dashed"
 					data-column="Done"
 					onDragEnter={dragEnter}
 					onDragLeave={dragLeave}

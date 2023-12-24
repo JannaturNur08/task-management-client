@@ -1,23 +1,17 @@
 a.active {
-	color: #bd2525;
-    
+	color: #cc0e0e;
 }
 .sticky-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-   width: 100%;
-   padding: 20px 100px 20px 100px;
-     background-color: #002B44;
-    /* color: #fff; */ 
-    
-    text-align: center;
-    z-index: 100; 
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	text-align: center;
+	z-index: 100;
 }
 
-
 @media screen and (max-width: 768px) {
-  .navbar{
-    padding:  0 20px 0 20px;
-  }
+	.navbar {
+		padding: 0 20px 0 20px;
+	}
 }
