@@ -18,6 +18,13 @@ const ListTasks = () => {
 	const [draggedTaskId, setDraggedTaskId] = useState([]);
 	const axiosPublic = useAxiosPublic();
 
+	const {
+		register,
+		handleSubmit,
+		reset,
+		formState: { isDirty: resetForm },
+	} = useForm();
+
 	const dragEnter = (event) => {
 		event.currentTarget.classList.add("drop");
 	};
@@ -33,8 +40,6 @@ const ListTasks = () => {
 		setDraggedTaskId(taskId);
 		//console.log(draggedTaskId);
 	};
-	console.log(myTasks);
-
 	const drop = async (event, column) => {
 		const taskId = event.dataTransfer.getData("text/plain");
 		//  console.log(taskId);
@@ -101,16 +106,7 @@ const ListTasks = () => {
 		event.preventDefault();
 		//refetch();
 	};
-
-	const {
-		register,
-		handleSubmit,
-		reset,
-		formState: { isDirty: resetForm },
-	} = useForm();
-
 	console.log(myTasks);
-
 	const handleFormSubmit = async (data) => {
 		console.log("submitted");
 		const task = {
@@ -119,7 +115,7 @@ const ListTasks = () => {
 			description: data.description,
 			deadline: data.deadline,
 			priority: data.priority,
-			status: "Todo",
+			status: "ToDo",
 		};
 		//
 
@@ -136,11 +132,13 @@ const ListTasks = () => {
 				position: "top-end",
 				icon: "success",
 				title: "Task is added to the database.",
-				showConfirmButton: false,
-				timer: 1500,
 			});
 		}
 	};
+
+	
+
+	console.log(myTasks);
 
 	//delete task
 	const handleDelete = (id) => {
@@ -265,18 +263,18 @@ const ListTasks = () => {
 				{/* todo */}
 				<div
 					className="column column-Todo w-72"
-					data-column="Todo"
+					data-column="ToDo"
 					onDragEnter={dragEnter}
 					onDragLeave={dragLeave}
 					onDragOver={allowDrop}
-					onDrop={(event) => drop(event, "todo")}>
+					onDrop={(event) => drop(event, "ToDo")}>
 					<div className="flex gap-2 items-center bg-gray-400 p-3 rounded-lg mb-4 ">
 						<div className="h-4 aspect-square  bg-gray-300 rounded-full"></div>
-						<h3 className="font-bold text-white">To-Do</h3>
+						<h3 className="font-bold text-white">ToDo</h3>
 					</div>
 					<div className="flex flex-col gap-4">
 						{myTasks
-							.filter((card) => card.status === "Todo")
+							.filter((card) => card.status === "ToDo")
 							.map((task) => (
 								<div
 									key={task._id}
