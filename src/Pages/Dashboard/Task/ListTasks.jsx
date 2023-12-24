@@ -107,8 +107,11 @@ const ListTasks = () => {
 		//refetch();
 	};
 	console.log(myTasks);
+
+	//task add
 	const handleFormSubmit = async (data) => {
-		console.log("submitted");
+		console.log("Submitting form...");
+
 		const task = {
 			email: user.email,
 			task_title: data.task_title,
@@ -117,26 +120,39 @@ const ListTasks = () => {
 			priority: data.priority,
 			status: "ToDo",
 		};
-		//
 
-		const TaskRes = await axiosPublic.post("/tasks", task);
+		console.log("Before submitting the form");
 
-		if (TaskRes.data.insertedId > 0) {
-			// show success popup
-			if (resetForm) {
-				reset();
-			}
-
+		await axiosPublic.post("/tasks", task).then((res) => {
+			document.getElementById("my_modal_1").close();
 			refetch();
+			reset();
 			Swal.fire({
 				position: "top-end",
 				icon: "success",
 				title: "Task is added to the database.",
 			});
-		}
-	};
+			if (res.data.insertedId > 0) {
+				// Reset the form
+				reset();
+				console.log("inside response");
 
-	
+				// Refetch the tasks
+				refetch();
+
+				// Delay the Swal modal by 100 milliseconds
+
+				console.log("Showing Swal modal...");
+				Swal.fire({
+					position: "top-end",
+					icon: "success",
+					title: "Task is added to the database.",
+				});
+			}
+		});
+
+		//console.log("Form submitted. Response:", res.data);
+	};
 
 	console.log(myTasks);
 
@@ -183,6 +199,7 @@ const ListTasks = () => {
 				<dialog className="modal" id="my_modal_1">
 					<div className="modal-box">
 						<form
+							id="taskForm"
 							method="dialog"
 							onSubmit={handleSubmit(handleFormSubmit)}>
 							{/* Form fields */}
@@ -245,11 +262,12 @@ const ListTasks = () => {
 										Submit
 									</button>
 									<button
-										onClick={() =>
+										onClick={(e) => {
+											e.preventDefault();
 											document
 												.getElementById("my_modal_1")
-												.close()
-										}
+												.close();
+										}}
 										className="btn bg-slate-500 text-white hover:bg-slate-700">
 										Close
 									</button>
